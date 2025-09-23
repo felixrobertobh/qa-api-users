@@ -2,12 +2,16 @@
   "name": "qa-api-users",
   "version": "1.0.0",
   "main": "index.js",
-"scripts": {
-  "test": "cypress run",
-  "test:headed": "cypress open",
-  "report:merge": "mochawesome-merge cypress/results/*.json > reports/mochawesome.json",
-  "report:generate": "marge reports/mochawesome.json -f index -o reports",
-  "report": "npm run report:merge && npm run report:generate",
-  "ci": "npm run test && npm run report"
-}
+  "scripts": {
+    "test": "cypress run",
+    "report": "mochawesome-merge reports/*.json > reports/report.json && marge reports/report.json -f report -o reports",
+    "ci": "rimraf reports && cypress run --reporter mochawesome --reporter-options reportDir=reports,overwrite=false,html=false,json=true"
+  },
+  "devDependencies": {
+    "cypress": "^15.3.0",
+    "mochawesome": "^7.1.4",
+    "mochawesome-merge": "^5.0.0",
+    "mochawesome-report-generator": "^6.3.0",
+    "rimraf": "^6.0.1"
+  }
 }
