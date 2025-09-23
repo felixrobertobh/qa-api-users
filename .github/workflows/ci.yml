@@ -1,0 +1,36 @@
+name: CI - QA API (Cypress)
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - run: npm ci
+
+      - name: Run Cypress tests + generate report
+        env:
+          API_BASE_URL: https://serverest.dev
+          USERS_PATH: /usuarios
+          LOGIN_PATH: /login
+          RATE_LIMIT_PER_MIN: 100
+        run: npm run ci
+
+      - name: Upload Mochawesome report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mochawesome-report
+          path: reports
+          if-no-files-found: error

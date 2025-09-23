@@ -11,11 +11,15 @@ describe('Usuarios - Rate Limit (100 req/min)', () => {
 
     Cypress._.times(20, () => {
       cy.wait(100);
-      cy.request({ method: 'GET', url: usersPath, headers: authHeaders(), failOnStatusCode: false })
-        .then((res) => {
-          expect([200, 429]).to.include(res.status);
-          count += 1;
-        });
+      cy.request({
+        method: 'GET',
+        url: usersPath,
+        headers: authHeaders(),
+        failOnStatusCode: false
+      }).then((res) => {
+        expect([200, 429]).to.include(res.status);
+        count += 1;
+      });
     });
 
     cy.then(() => {
