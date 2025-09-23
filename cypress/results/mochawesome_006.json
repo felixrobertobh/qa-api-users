@@ -1,0 +1,105 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-09-23T22:24:05.494Z",
+    "end": "2025-09-23T22:24:12.517Z",
+    "duration": 7023,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "016c1402-17c1-4478-80d7-51578f7bb091",
+      "title": "",
+      "fullFile": "cypress/e2e/users.ratelimit.spec.cy.js",
+      "file": "cypress/e2e/users.ratelimit.spec.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "adda987d-54a1-483f-a73e-90ef4cc0b4a2",
+          "title": "Usuarios - Rate Limit (100 req/min)",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Cliente não excede 100 req/min (aceita 429 do servidor)",
+              "fullTitle": "Usuarios - Rate Limit (100 req/min) Cliente não excede 100 req/min (aceita 429 do servidor)",
+              "timedOut": null,
+              "duration": 7010,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "let count = 0;\nCypress._.times(20, () => {\n  cy.wait(100);\n  cy.request({\n    method: 'GET',\n    url: usersPath,\n    headers: (0, _api.authHeaders)(),\n    failOnStatusCode: false\n  }).then(res => {\n    expect([200, 429]).to.include(res.status);\n    count += 1;\n  });\n});\ncy.then(() => {\n  expect(count).to.be.lte(LIMIT);\n});",
+              "err": {},
+              "uuid": "958c3230-0721-4be7-8648-0d5f1f2146b7",
+              "parentUUID": "adda987d-54a1-483f-a73e-90ef4cc0b4a2",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "958c3230-0721-4be7-8648-0d5f1f2146b7"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 7010,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/results",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.3.0"
+    }
+  }
+}

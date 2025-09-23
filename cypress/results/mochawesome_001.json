@@ -1,0 +1,190 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 5,
+    "passes": 3,
+    "pending": 0,
+    "failures": 2,
+    "start": "2025-09-23T21:54:33.237Z",
+    "end": "2025-09-23T21:54:35.499Z",
+    "duration": 2262,
+    "testsRegistered": 5,
+    "passPercent": 60,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "44adbdae-ff0d-46ab-95db-053d7cd17dfe",
+      "title": "",
+      "fullFile": "cypress/e2e/users.crud.spec.cy.js",
+      "file": "cypress/e2e/users.crud.spec.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "6826997d-1bcc-47d1-b9c3-df4ac6d655e4",
+          "title": "Usuarios - CRUD",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Cria usuário",
+              "fullTitle": "Usuarios - CRUD Cria usuário",
+              "timedOut": null,
+              "duration": 528,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.request({\n  method: 'POST',\n  url: `${usersPath}`,\n  headers: (0, _api.authHeaders)(),\n  body: (0, _dataFactory.newUser)()\n}).then(res => {\n  expect(res.status).to.eq(201);\n  createdId = res.body._id;\n});",
+              "err": {},
+              "uuid": "8ec4c2be-aad5-4db7-b984-1e20a4a101fc",
+              "parentUUID": "6826997d-1bcc-47d1-b9c3-df4ac6d655e4",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Lista usuários inclui o criado",
+              "fullTitle": "Usuarios - CRUD Lista usuários inclui o criado",
+              "timedOut": null,
+              "duration": 624,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.request({\n  method: 'GET',\n  url: `${usersPath}`,\n  headers: (0, _api.authHeaders)()\n}).its('body.usuarios').should('deep.include.something.like', {\n  _id: createdId\n});",
+              "err": {
+                "message": "CypressError: The chainer `something` was not found. Could not build assertion.",
+                "estack": "CypressError: The chainer `something` was not found. Could not build assertion.\n    at cypressErr (https://serverest.dev/__cypress/runner/cypress_runner.js:77732:18)\n    at Object.cypressErrByPath (https://serverest.dev/__cypress/runner/cypress_runner.js:77737:10)\n    at <unknown> (https://serverest.dev/__cypress/runner/cypress_runner.js:121160:78)\n    at arrayReduce (https://serverest.dev/__cypress/runner/cypress_runner.js:18675:21)\n    at lodash.reduce (https://serverest.dev/__cypress/runner/cypress_runner.js:27727:14)\n    at applyChainers (https://serverest.dev/__cypress/runner/cypress_runner.js:121158:68)\n    at tryCatcher (https://serverest.dev/__cypress/runner/cypress_runner.js:1777:23)\n    at Promise.attempt.Promise.try (https://serverest.dev/__cypress/runner/cypress_runner.js:4285:29)\n    at Context.shouldFn (https://serverest.dev/__cypress/runner/cypress_runner.js:121184:66)\n    at Context.should (https://serverest.dev/__cypress/runner/cypress_runner.js:121201:23)\n    at <unknown> (https://serverest.dev/__cypress/runner/cypress_runner.js:146519:39)\n    at assertions (https://serverest.dev/__cypress/runner/cypress_runner.js:146767:16)\n    at tryCatcher (https://serverest.dev/__cypress/runner/cypress_runner.js:1777:23)\n    at Object.gotValue (https://serverest.dev/__cypress/runner/cypress_runner.js:6448:18)\n    at Object.gotAccum (https://serverest.dev/__cypress/runner/cypress_runner.js:6435:25)\n    at Object.tryCatcher (https://serverest.dev/__cypress/runner/cypress_runner.js:1777:23)\n    at Promise._settlePromiseFromHandler (https://serverest.dev/__cypress/runner/cypress_runner.js:1489:31)\n    at Promise._settlePromise (https://serverest.dev/__cypress/runner/cypress_runner.js:1546:18)\n    at Promise._settlePromiseCtx (https://serverest.dev/__cypress/runner/cypress_runner.js:1583:10)\n    at _drainQueueStep (https://serverest.dev/__cypress/runner/cypress_runner.js:2381:12)\n    at _drainQueue (https://serverest.dev/__cypress/runner/cypress_runner.js:2370:9)\n    at Async._drainQueues (https://serverest.dev/__cypress/runner/cypress_runner.js:2386:5)\nFrom Your Spec Code:\n    at Context.eval (webpack://qa-api-users/./cypress/e2e/users.crud.spec.cy.js:27:28)",
+                "diff": null
+              },
+              "uuid": "92761db5-1f1c-44d4-acbf-081a63fee9c8",
+              "parentUUID": "6826997d-1bcc-47d1-b9c3-df4ac6d655e4",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Busca usuário por ID",
+              "fullTitle": "Usuarios - CRUD Busca usuário por ID",
+              "timedOut": null,
+              "duration": 174,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.request({\n  method: 'GET',\n  url: `${usersPath}/${createdId}`,\n  headers: (0, _api.authHeaders)()\n}).its('body').should('include', {\n  _id: createdId\n});",
+              "err": {},
+              "uuid": "65afaf21-f7a0-40f6-82fb-4b8608d624ff",
+              "parentUUID": "6826997d-1bcc-47d1-b9c3-df4ac6d655e4",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Atualiza usuário",
+              "fullTitle": "Usuarios - CRUD Atualiza usuário",
+              "timedOut": null,
+              "duration": 694,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.request({\n  method: 'PUT',\n  url: `${usersPath}/${createdId}`,\n  headers: (0, _api.authHeaders)(),\n  body: {\n    nome: 'QA Updated',\n    administrador: 'true'\n  }\n}).its('status').should('be.oneOf', [200, 201]);",
+              "err": {
+                "message": "CypressError: `cy.request()` failed on:\n\nhttps://serverest.dev/usuarios/BLODwPMT513okrWr\n\nThe response we received from your web server was:\n\n  > 400: Bad Request\n\nThis was considered a failure because the status code was not `2xx` or `3xx`.\n\nIf you do not want status codes to cause failures pass the option: `failOnStatusCode: false`\n\n-----------------------------------------------------------\n\nThe request we sent was:\n\nMethod: PUT\nURL: https://serverest.dev/usuarios/BLODwPMT513okrWr\nHeaders: {\n  \"Connection\": \"keep-alive\",\n  \"Authorization\": \"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluXzE3NTg2NjQ0NzMyNDZAcWEuY29tIiwicGFzc3dvcmQiOiJzZWNyZXQxMjMiLCJpYXQiOjE3NTg2NjQ0NzMsImV4cCI6MTc1ODY2NTA3M30.7KaaKtkzz_maF9QNkzvsnnpJ3IQ9wiBjPoj9WlvYl-o\",\n  \"user-agent\": \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/15.3.0 Chrome/136.0.7103.177 Electron/36.8.1 Safari/537.36\",\n  \"accept\": \"*/*\",\n  \"accept-encoding\": \"gzip, deflate\",\n  \"content-type\": \"application/json\",\n  \"content-length\": 44\n}\nBody: {\"nome\":\"QA Updated\",\"administrador\":\"true\"}\n\n-----------------------------------------------------------\n\nThe response we got was:\n\nStatus: 400 - Bad Request\nHeaders: {\n  \"access-control-allow-origin\": \"*\",\n  \"x-dns-prefetch-control\": \"off\",\n  \"x-frame-options\": \"SAMEORIGIN\",\n  \"strict-transport-security\": \"max-age=15552000; includeSubDomains\",\n  \"x-download-options\": \"noopen\",\n  \"x-content-type-options\": \"nosniff\",\n  \"x-xss-protection\": \"1; mode=block\",\n  \"content-type\": \"application/json; charset=utf-8\",\n  \"x-cloud-trace-context\": \"48829d1d60d2175d27ed151b32977e64\",\n  \"date\": \"Tue, 23 Sep 2025 21:54:34 GMT\",\n  \"server\": \"Google Frontend\",\n  \"content-length\": \"84\"\n}\nBody: {\n  \"email\": \"email é obrigatório\",\n  \"password\": \"password é obrigatório\"\n}\n\n\nhttps://on.cypress.io/request",
+                "estack": "CypressError: `cy.request()` failed on:\n\nhttps://serverest.dev/usuarios/BLODwPMT513okrWr\n\nThe response we received from your web server was:\n\n  > 400: Bad Request\n\nThis was considered a failure because the status code was not `2xx` or `3xx`.\n\nIf you do not want status codes to cause failures pass the option: `failOnStatusCode: false`\n\n-----------------------------------------------------------\n\nThe request we sent was:\n\nMethod: PUT\nURL: https://serverest.dev/usuarios/BLODwPMT513okrWr\nHeaders: {\n  \"Connection\": \"keep-alive\",\n  \"Authorization\": \"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluXzE3NTg2NjQ0NzMyNDZAcWEuY29tIiwicGFzc3dvcmQiOiJzZWNyZXQxMjMiLCJpYXQiOjE3NTg2NjQ0NzMsImV4cCI6MTc1ODY2NTA3M30.7KaaKtkzz_maF9QNkzvsnnpJ3IQ9wiBjPoj9WlvYl-o\",\n  \"user-agent\": \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/15.3.0 Chrome/136.0.7103.177 Electron/36.8.1 Safari/537.36\",\n  \"accept\": \"*/*\",\n  \"accept-encoding\": \"gzip, deflate\",\n  \"content-type\": \"application/json\",\n  \"content-length\": 44\n}\nBody: {\"nome\":\"QA Updated\",\"administrador\":\"true\"}\n\n-----------------------------------------------------------\n\nThe response we got was:\n\nStatus: 400 - Bad Request\nHeaders: {\n  \"access-control-allow-origin\": \"*\",\n  \"x-dns-prefetch-control\": \"off\",\n  \"x-frame-options\": \"SAMEORIGIN\",\n  \"strict-transport-security\": \"max-age=15552000; includeSubDomains\",\n  \"x-download-options\": \"noopen\",\n  \"x-content-type-options\": \"nosniff\",\n  \"x-xss-protection\": \"1; mode=block\",\n  \"content-type\": \"application/json; charset=utf-8\",\n  \"x-cloud-trace-context\": \"48829d1d60d2175d27ed151b32977e64\",\n  \"date\": \"Tue, 23 Sep 2025 21:54:34 GMT\",\n  \"server\": \"Google Frontend\",\n  \"content-length\": \"84\"\n}\nBody: {\n  \"email\": \"email é obrigatório\",\n  \"password\": \"password é obrigatório\"\n}\n\n\nhttps://on.cypress.io/request\n    at <unknown> (https://serverest.dev/__cypress/runner/cypress_runner.js:136321:72)\n    at tryCatcher (https://serverest.dev/__cypress/runner/cypress_runner.js:1777:23)\n    at Promise._settlePromiseFromHandler (https://serverest.dev/__cypress/runner/cypress_runner.js:1489:31)\n    at Promise._settlePromise (https://serverest.dev/__cypress/runner/cypress_runner.js:1546:18)\n    at Promise._settlePromise0 (https://serverest.dev/__cypress/runner/cypress_runner.js:1591:10)\n    at Promise._settlePromises (https://serverest.dev/__cypress/runner/cypress_runner.js:1671:18)\n    at _drainQueueStep (https://serverest.dev/__cypress/runner/cypress_runner.js:2377:12)\n    at _drainQueue (https://serverest.dev/__cypress/runner/cypress_runner.js:2370:9)\n    at Async._drainQueues (https://serverest.dev/__cypress/runner/cypress_runner.js:2386:5)\n    at Async.drainQueues (https://serverest.dev/__cypress/runner/cypress_runner.js:2256:14)\nFrom Your Spec Code:\n    at Context.eval (webpack://qa-api-users/./cypress/e2e/users.crud.spec.cy.js:39:7)",
+                "diff": null
+              },
+              "uuid": "e3b14042-5972-49e0-8a23-da64e5cf5ee4",
+              "parentUUID": "6826997d-1bcc-47d1-b9c3-df4ac6d655e4",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Deleta usuário",
+              "fullTitle": "Usuarios - CRUD Deleta usuário",
+              "timedOut": null,
+              "duration": 172,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.request({\n  method: 'DELETE',\n  url: `${usersPath}/${createdId}`,\n  headers: (0, _api.authHeaders)()\n}).its('status').should('be.oneOf', [200, 204]);",
+              "err": {},
+              "uuid": "e248630f-0184-41b4-a6a5-b0c7633cc9eb",
+              "parentUUID": "6826997d-1bcc-47d1-b9c3-df4ac6d655e4",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "8ec4c2be-aad5-4db7-b984-1e20a4a101fc",
+            "65afaf21-f7a0-40f6-82fb-4b8608d624ff",
+            "e248630f-0184-41b4-a6a5-b0c7633cc9eb"
+          ],
+          "failures": [
+            "92761db5-1f1c-44d4-acbf-081a63fee9c8",
+            "e3b14042-5972-49e0-8a23-da64e5cf5ee4"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 2192,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/results",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.3.0"
+    }
+  }
+}

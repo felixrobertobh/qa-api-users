@@ -1,0 +1,13 @@
+{
+  "name": "qa-api-users",
+  "version": "1.0.0",
+  "main": "index.js",
+"scripts": {
+  "test": "cypress run",
+  "test:headed": "cypress open",
+  "report:merge": "mochawesome-merge cypress/results/*.json > reports/mochawesome.json",
+  "report:generate": "marge reports/mochawesome.json -f index -o reports",
+  "report": "npm run report:merge && npm run report:generate",
+  "ci": "npm run test && npm run report"
+}
+}

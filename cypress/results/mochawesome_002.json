@@ -1,0 +1,109 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 0,
+    "pending": 0,
+    "failures": 1,
+    "start": "2025-09-23T21:54:36.440Z",
+    "end": "2025-09-23T21:59:48.884Z",
+    "duration": 312444,
+    "testsRegistered": 1,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "41d07543-0334-4029-8ee3-e4ec5c090317",
+      "title": "",
+      "fullFile": "cypress/e2e/users.ratelimit.spec.cy.js",
+      "file": "cypress/e2e/users.ratelimit.spec.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "de252725-5da0-42a7-9f7d-faf66be89dc8",
+          "title": "Usuarios - Rate Limit",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Não ultrapassa 100 req/min",
+              "fullTitle": "Usuarios - Rate Limit Não ultrapassa 100 req/min",
+              "timedOut": null,
+              "duration": 64919,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "let count = 0;\nfor (let i = 0; i < 20; i++) {\n  cy.wait(100);\n  cy.request({\n    method: 'GET',\n    url: usersPath,\n    headers: (0, _api.authHeaders)(),\n    failOnStatusCode: false\n  }).then(res => {\n    expect([200, 429]).to.include(res.status);\n    count++;\n  });\n}\ncy.then(() => {\n  expect(count).to.be.lte(LIMIT);\n});",
+              "err": {
+                "message": "CypressError: `cy.screenshot()` timed out waiting `30000ms` to complete.",
+                "estack": "CypressError: `cy.screenshot()` timed out waiting `30000ms` to complete.\n    at https://serverest.dev/__cypress/runner/cypress_runner.js:137645:73\n    at tryCatcher (https://serverest.dev/__cypress/runner/cypress_runner.js:1777:23)\n    at https://serverest.dev/__cypress/runner/cypress_runner.js:4156:41\n    at tryCatcher (https://serverest.dev/__cypress/runner/cypress_runner.js:1777:23)\n    at Promise._settlePromiseFromHandler (https://serverest.dev/__cypress/runner/cypress_runner.js:1489:31)\n    at Promise._settlePromise (https://serverest.dev/__cypress/runner/cypress_runner.js:1546:18)\n    at Promise._settlePromise0 (https://serverest.dev/__cypress/runner/cypress_runner.js:1591:10)\n    at Promise._settlePromises (https://serverest.dev/__cypress/runner/cypress_runner.js:1667:18)\n    at _drainQueueStep (https://serverest.dev/__cypress/runner/cypress_runner.js:2377:12)\n    at _drainQueue (https://serverest.dev/__cypress/runner/cypress_runner.js:2370:9)\n    at Async._drainQueues (https://serverest.dev/__cypress/runner/cypress_runner.js:2386:5)\n    at Async.drainQueues (https://serverest.dev/__cypress/runner/cypress_runner.js:2256:14)",
+                "diff": null
+              },
+              "uuid": "3f419455-7102-49d8-b70d-88289a28023b",
+              "parentUUID": "de252725-5da0-42a7-9f7d-faf66be89dc8",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "3f419455-7102-49d8-b70d-88289a28023b"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 64919,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/results",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.3.0"
+    }
+  }
+}

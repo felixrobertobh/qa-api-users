@@ -1,0 +1,105 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-09-23T21:54:31.716Z",
+    "end": "2025-09-23T21:54:32.293Z",
+    "duration": 577,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "116fedaf-9aef-465e-81d8-0ecb1fa44f63",
+      "title": "",
+      "fullFile": "cypress/e2e/auth.spec.cy.js",
+      "file": "cypress/e2e/auth.spec.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "e44de07b-c995-4568-951c-b7fa9d7aa267",
+          "title": "Auth - JWT",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Cria admin e obtém token de autorização",
+              "fullTitle": "Auth - JWT Cria admin e obtém token de autorização",
+              "timedOut": null,
+              "duration": 567,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.auth_createAdminAndLogin();\ncy.then(() => {\n  expect(Cypress.env('token')).to.be.a('string').and.not.be.empty;\n});",
+              "err": {},
+              "uuid": "c455156c-a7fd-4dec-8aeb-d82c63a186cf",
+              "parentUUID": "e44de07b-c995-4568-951c-b7fa9d7aa267",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "c455156c-a7fd-4dec-8aeb-d82c63a186cf"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 567,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/results",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.3.0"
+    }
+  }
+}

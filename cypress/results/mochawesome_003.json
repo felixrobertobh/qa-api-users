@@ -1,0 +1,148 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 2,
+    "pending": 0,
+    "failures": 1,
+    "start": "2025-09-23T21:59:50.054Z",
+    "end": "2025-09-23T21:59:56.754Z",
+    "duration": 6700,
+    "testsRegistered": 3,
+    "passPercent": 66.66666666666666,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "d71a91ff-ca1b-40a3-b612-5811bb52689b",
+      "title": "",
+      "fullFile": "cypress/e2e/users.validation.spec.cy.js",
+      "file": "cypress/e2e/users.validation.spec.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "b1387184-ade6-4237-b10e-11a343d4a4e6",
+          "title": "Usuarios - Validações",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Campos obrigatórios",
+              "fullTitle": "Usuarios - Validações Campos obrigatórios",
+              "timedOut": null,
+              "duration": 1233,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "['nome', 'email', 'password', 'administrador'].forEach(field => {\n  const u = (0, _dataFactory.newUser)();\n  delete u[field];\n  cy.request({\n    method: 'POST',\n    url: usersPath,\n    headers: (0, _api.authHeaders)(),\n    body: u,\n    failOnStatusCode: false\n  }).its('status').should('be.oneOf', [400, 422]);\n});",
+              "err": {},
+              "uuid": "8afbf609-cb20-41c7-b7b4-0ee7b300a72b",
+              "parentUUID": "b1387184-ade6-4237-b10e-11a343d4a4e6",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Emails inválidos",
+              "fullTitle": "Usuarios - Validações Emails inválidos",
+              "timedOut": null,
+              "duration": 867,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "_users.default.invalidEmails.forEach(email => {\n  cy.request({\n    method: 'POST',\n    url: usersPath,\n    headers: (0, _api.authHeaders)(),\n    body: (0, _dataFactory.newUser)({\n      email\n    }),\n    failOnStatusCode: false\n  }).its('status').should('be.oneOf', [400, 422]);\n});",
+              "err": {},
+              "uuid": "5a724f11-adbe-4759-8f10-064fe2b2cf38",
+              "parentUUID": "b1387184-ade6-4237-b10e-11a343d4a4e6",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Senhas fracas",
+              "fullTitle": "Usuarios - Validações Senhas fracas",
+              "timedOut": null,
+              "duration": 4543,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "_users.default.weakPasswords.forEach(pwd => {\n  cy.request({\n    method: 'POST',\n    url: usersPath,\n    headers: (0, _api.authHeaders)(),\n    body: (0, _dataFactory.newUser)({\n      password: pwd\n    }),\n    failOnStatusCode: false\n  }).its('status').should('be.oneOf', [400, 422]);\n});",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 4000ms: expected 201 to be one of [ 400, 422 ]",
+                "estack": "AssertionError: Timed out retrying after 4000ms: expected 201 to be one of [ 400, 422 ]\n    at eval (webpack://qa-api-users/./cypress/e2e/users.validation.spec.cy.js:28:23)\nat Array.forEach (<anonymous>)\n    at Context.eval (webpack://qa-api-users/./cypress/e2e/users.validation.spec.cy.js:26:22)",
+                "diff": "- 201\n+ [ 400, 422 ]\n"
+              },
+              "uuid": "63635e1f-62e5-42e5-b329-c9060d7c6f4f",
+              "parentUUID": "b1387184-ade6-4237-b10e-11a343d4a4e6",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "8afbf609-cb20-41c7-b7b4-0ee7b300a72b",
+            "5a724f11-adbe-4759-8f10-064fe2b2cf38"
+          ],
+          "failures": [
+            "63635e1f-62e5-42e5-b329-c9060d7c6f4f"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 6643,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/results",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.3.0"
+    }
+  }
+}

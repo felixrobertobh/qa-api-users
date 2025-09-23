@@ -1,0 +1,4 @@
+{
+    "invalidEmails": ["plainaddress", "user@.com", "@domain.com", "user@domain", "user@domain..com"],
+    "weakPasswords": ["", "1", "12", "abc", "12345"]
+  }
