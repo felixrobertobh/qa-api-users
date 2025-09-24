@@ -1,0 +1,205 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 6,
+    "passes": 5,
+    "pending": 0,
+    "failures": 1,
+    "start": "2025-09-24T00:59:37.548Z",
+    "end": "2025-09-24T00:59:46.220Z",
+    "duration": 8672,
+    "testsRegistered": 6,
+    "passPercent": 83.33333333333334,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "e77a1f40-630a-4846-a8ec-62565f645c63",
+      "title": "",
+      "fullFile": "cypress/e2e/users.validation.spec.cy.js",
+      "file": "cypress/e2e/users.validation.spec.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "39f85512-8c84-4e5c-8d7c-e0c9ef5fd9d5",
+          "title": "Usuarios - Validações/Negativos",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Campos obrigatórios faltando",
+              "fullTitle": "Usuarios - Validações/Negativos Campos obrigatórios faltando",
+              "timedOut": null,
+              "duration": 1201,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "['nome', 'email', 'password', 'administrador'].forEach(field => {\n  const u = (0, _dataFactory.newUser)();\n  delete u[field];\n  cy.request({\n    method: 'POST',\n    url: usersPath,\n    headers: (0, _api.authHeaders)(),\n    body: u,\n    failOnStatusCode: false\n  }).its('status').should('be.oneOf', [400, 422]);\n});",
+              "err": {},
+              "uuid": "c61aa71b-5ab0-4558-b9e4-fe7f90d1c955",
+              "parentUUID": "39f85512-8c84-4e5c-8d7c-e0c9ef5fd9d5",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Emails inválidos",
+              "fullTitle": "Usuarios - Validações/Negativos Emails inválidos",
+              "timedOut": null,
+              "duration": 831,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "_users.default.invalidEmails.forEach(email => {\n  cy.request({\n    method: 'POST',\n    url: usersPath,\n    headers: (0, _api.authHeaders)(),\n    body: (0, _dataFactory.newUser)({\n      email\n    }),\n    failOnStatusCode: false\n  }).its('status').should('be.oneOf', [400, 422]);\n});",
+              "err": {},
+              "uuid": "8a9b30dc-a64b-401c-8f82-8bc54547fa40",
+              "parentUUID": "39f85512-8c84-4e5c-8d7c-e0c9ef5fd9d5",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Email duplicado",
+              "fullTitle": "Usuarios - Validações/Negativos Email duplicado",
+              "timedOut": null,
+              "duration": 175,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.request({\n  method: 'POST',\n  url: usersPath,\n  headers: (0, _api.authHeaders)(),\n  body: (0, _dataFactory.newUser)({\n    email: existing.email\n  }),\n  failOnStatusCode: false\n}).its('status').should('be.oneOf', [400, 409]);",
+              "err": {},
+              "uuid": "c5bc1c79-981f-48ff-bf4f-432fab4f40cd",
+              "parentUUID": "39f85512-8c84-4e5c-8d7c-e0c9ef5fd9d5",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Campo \"administrador\" deve ser string \"true\" ou \"false\"",
+              "fullTitle": "Usuarios - Validações/Negativos Campo \"administrador\" deve ser string \"true\" ou \"false\"",
+              "timedOut": null,
+              "duration": 830,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const wrongTypes = [true, false, 1, 0, null];\nwrongTypes.forEach(val => {\n  cy.request({\n    method: 'POST',\n    url: usersPath,\n    headers: (0, _api.authHeaders)(),\n    body: (0, _dataFactory.newUser)({\n      administrador: val\n    }),\n    failOnStatusCode: false\n  }).its('status').should('be.oneOf', [400, 422]);\n});",
+              "err": {},
+              "uuid": "f6f47a07-d802-4aba-b991-3f7f6405e7be",
+              "parentUUID": "39f85512-8c84-4e5c-8d7c-e0c9ef5fd9d5",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Senhas fracas (ServeRest aceita → considerar limitação)",
+              "fullTitle": "Usuarios - Validações/Negativos Senhas fracas (ServeRest aceita → considerar limitação)",
+              "timedOut": null,
+              "duration": 839,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "_users.default.weakPasswords.forEach(pwd => {\n  cy.request({\n    method: 'POST',\n    url: usersPath,\n    headers: (0, _api.authHeaders)(),\n    body: (0, _dataFactory.newUser)({\n      password: pwd\n    }),\n    failOnStatusCode: false\n  }).its('status').should('be.oneOf', [201, 400, 422]);\n});",
+              "err": {},
+              "uuid": "df9ef679-b31b-487e-8138-ad3c82248584",
+              "parentUUID": "39f85512-8c84-4e5c-8d7c-e0c9ef5fd9d5",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "ID inexistente em GET/PUT/DELETE",
+              "fullTitle": "Usuarios - Validações/Negativos ID inexistente em GET/PUT/DELETE",
+              "timedOut": null,
+              "duration": 4699,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "const ghost = '000000000000000000000000';\ncy.request({\n  method: 'GET',\n  url: `${usersPath}/${ghost}`,\n  headers: (0, _api.authHeaders)(),\n  failOnStatusCode: false\n}).its('status').should('be.oneOf', [400, 404]);\ncy.request({\n  method: 'PUT',\n  url: `${usersPath}/${ghost}`,\n  headers: (0, _api.authHeaders)(),\n  body: {\n    nome: 'X'\n  },\n  failOnStatusCode: false\n}).its('status').should('be.oneOf', [400, 404]);\ncy.request({\n  method: 'DELETE',\n  url: `${usersPath}/${ghost}`,\n  headers: (0, _api.authHeaders)(),\n  failOnStatusCode: false\n}).its('status').should('be.oneOf', [400, 404]);",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 4000ms: expected 200 to be one of [ 400, 404 ]",
+                "estack": "AssertionError: Timed out retrying after 4000ms: expected 200 to be one of [ 400, 404 ]\n    at Context.eval (webpack://qa-api-users/./cypress/e2e/users.validation.spec.cy.js:78:21)",
+                "diff": "- 200\n+ [ 400, 404 ]\n"
+              },
+              "uuid": "e75c2395-4218-417d-90e6-5dbff38e9499",
+              "parentUUID": "39f85512-8c84-4e5c-8d7c-e0c9ef5fd9d5",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "c61aa71b-5ab0-4558-b9e4-fe7f90d1c955",
+            "8a9b30dc-a64b-401c-8f82-8bc54547fa40",
+            "c5bc1c79-981f-48ff-bf4f-432fab4f40cd",
+            "f6f47a07-d802-4aba-b991-3f7f6405e7be",
+            "df9ef679-b31b-487e-8138-ad3c82248584"
+          ],
+          "failures": [
+            "e75c2395-4218-417d-90e6-5dbff38e9499"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 8575,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "reports",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.3.0"
+    }
+  }
+}

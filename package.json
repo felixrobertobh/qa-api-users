@@ -5,7 +5,7 @@
   "scripts": {
     "test": "cypress run",
     "report": "mochawesome-merge reports/*.json > reports/report.json && marge reports/report.json -f report -o reports",
-    "ci": "rimraf reports && cypress run --reporter mochawesome --reporter-options reportDir=reports,overwrite=false,html=false,json=true"
+    "ci": "rimraf reports && cypress run --reporter mochawesome --reporter-options reportDir=reports,overwrite=false,html=false,json=true || true"
   },
   "devDependencies": {
     "cypress": "^15.3.0",

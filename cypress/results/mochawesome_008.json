@@ -5,9 +5,9 @@
     "passes": 1,
     "pending": 0,
     "failures": 0,
-    "start": "2025-09-24T00:59:24.878Z",
-    "end": "2025-09-24T00:59:25.474Z",
-    "duration": 596,
+    "start": "2025-09-24T00:58:27.612Z",
+    "end": "2025-09-24T00:58:28.220Z",
+    "duration": 608,
     "testsRegistered": 1,
     "passPercent": 100,
     "pendingPercent": 0,
@@ -18,7 +18,7 @@
   },
   "results": [
     {
-      "uuid": "9f15c490-5672-49a7-860d-de6dca13ac13",
+      "uuid": "1ec85546-633b-4efc-9cfd-4c514aebfcee",
       "title": "",
       "fullFile": "cypress/e2e/auth.spec.cy.js",
       "file": "cypress/e2e/auth.spec.cy.js",
@@ -27,7 +27,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "d22a2616-91cd-4bb6-90cd-7f7333ba6cb9",
+          "uuid": "efb5f9ef-9980-4762-bd85-1ed817323afb",
           "title": "Auth - JWT",
           "fullFile": "",
           "file": "",
@@ -38,7 +38,7 @@
               "title": "Cria admin e obtém token de autorização",
               "fullTitle": "Auth - JWT Cria admin e obtém token de autorização",
               "timedOut": null,
-              "duration": 573,
+              "duration": 583,
               "state": "passed",
               "speed": "fast",
               "pass": true,
@@ -47,20 +47,20 @@
               "context": null,
               "code": "cy.auth_createAdminAndLogin();\ncy.then(() => {\n  expect(Cypress.env('token')).to.be.a('string').and.not.be.empty;\n});",
               "err": {},
-              "uuid": "8e126653-a802-4378-bac2-ad18ce95d2aa",
-              "parentUUID": "d22a2616-91cd-4bb6-90cd-7f7333ba6cb9",
+              "uuid": "32c88720-ae99-46ab-865d-158f0a6872ed",
+              "parentUUID": "efb5f9ef-9980-4762-bd85-1ed817323afb",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "8e126653-a802-4378-bac2-ad18ce95d2aa"
+            "32c88720-ae99-46ab-865d-158f0a6872ed"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 573,
+          "duration": 583,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000
@@ -94,7 +94,7 @@
     },
     "marge": {
       "options": {
-        "reportDir": "reports",
+        "reportDir": "cypress/results",
         "overwrite": false,
         "html": false,
         "json": true

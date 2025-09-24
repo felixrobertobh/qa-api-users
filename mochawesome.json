@@ -1,0 +1,479 @@
+{
+  "stats": {
+    "suites": 4,
+    "tests": 14,
+    "passes": 12,
+    "pending": 0,
+    "failures": 2,
+    "testsRegistered": 14,
+    "passPercent": 85.71428571428571,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false,
+    "start": "2025-09-24T00:59:24.878Z",
+    "end": "2025-09-24T00:59:46.220Z",
+    "duration": 21342
+  },
+  "results": [
+    {
+      "uuid": "a303dc0d-c3dc-4846-9bfd-ec0ee80989af",
+      "title": "",
+      "fullFile": "cypress/e2e/users.crud.spec.cy.js",
+      "file": "cypress/e2e/users.crud.spec.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "e7541735-bf59-41dd-ac0d-5b58f7b33a74",
+          "title": "Usuarios - CRUD",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Cria usuário",
+              "fullTitle": "Usuarios - CRUD Cria usuário",
+              "timedOut": null,
+              "duration": 525,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.request({\n  method: 'POST',\n  url: `${usersPath}`,\n  headers: (0, _api.authHeaders)(),\n  body: (0, _dataFactory.newUser)()\n}).then(res => {\n  expect(res.status).to.eq(201);\n  createdId = res.body._id;\n});",
+              "err": {},
+              "uuid": "8afb75bc-8487-45aa-b907-1fe81040abcd",
+              "parentUUID": "e7541735-bf59-41dd-ac0d-5b58f7b33a74",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Lista inclui o criado",
+              "fullTitle": "Usuarios - CRUD Lista inclui o criado",
+              "timedOut": null,
+              "duration": 559,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.request({\n  method: 'GET',\n  url: `${usersPath}`,\n  headers: (0, _api.authHeaders)()\n}).its('body.usuarios').should(list => {\n  expect(list.find(u => u._id === createdId)).to.exist;\n});",
+              "err": {},
+              "uuid": "c1e718cc-6ffc-4048-8a9c-dd8451aeaaed",
+              "parentUUID": "e7541735-bf59-41dd-ac0d-5b58f7b33a74",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Detalha por ID",
+              "fullTitle": "Usuarios - CRUD Detalha por ID",
+              "timedOut": null,
+              "duration": 173,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.request({\n  method: 'GET',\n  url: `${usersPath}/${createdId}`,\n  headers: (0, _api.authHeaders)()\n}).its('body').should('include', {\n  _id: createdId\n});",
+              "err": {},
+              "uuid": "84bd0321-20a0-4bbf-af5c-911bdb330a7f",
+              "parentUUID": "e7541735-bf59-41dd-ac0d-5b58f7b33a74",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Atualiza usuário",
+              "fullTitle": "Usuarios - CRUD Atualiza usuário",
+              "timedOut": null,
+              "duration": 367,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.request({\n  method: 'PUT',\n  url: `${usersPath}/${createdId}`,\n  headers: (0, _api.authHeaders)(),\n  body: {\n    nome: 'QA Updated',\n    administrador: 'true'\n  }\n}).its('status').should('be.oneOf', [200, 201]);",
+              "err": {
+                "message": "CypressError: `cy.request()` failed on:\n\nhttps://serverest.dev/usuarios/7mJqzBJ9mGRQbJ9i\n\nThe response we received from your web server was:\n\n  > 400: Bad Request\n\nThis was considered a failure because the status code was not `2xx` or `3xx`.\n\nIf you do not want status codes to cause failures pass the option: `failOnStatusCode: false`\n\n-----------------------------------------------------------\n\nThe request we sent was:\n\nMethod: PUT\nURL: https://serverest.dev/usuarios/7mJqzBJ9mGRQbJ9i\nHeaders: {\n  \"Connection\": \"keep-alive\",\n  \"Authorization\": \"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluXzE3NTg2NzU1NjYyOTNAcWEuY29tIiwicGFzc3dvcmQiOiJzZWNyZXQxMjMiLCJpYXQiOjE3NTg2NzU1NjYsImV4cCI6MTc1ODY3NjE2Nn0.aQylORtW5BOXuPp668ZdPEEyh0oC-DIRllnp82lRw3M\",\n  \"user-agent\": \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/15.3.0 Chrome/136.0.7103.177 Electron/36.8.1 Safari/537.36\",\n  \"accept\": \"*/*\",\n  \"accept-encoding\": \"gzip, deflate\",\n  \"content-type\": \"application/json\",\n  \"content-length\": 44\n}\nBody: {\"nome\":\"QA Updated\",\"administrador\":\"true\"}\n\n-----------------------------------------------------------\n\nThe response we got was:\n\nStatus: 400 - Bad Request\nHeaders: {\n  \"access-control-allow-origin\": \"*\",\n  \"x-dns-prefetch-control\": \"off\",\n  \"x-frame-options\": \"SAMEORIGIN\",\n  \"strict-transport-security\": \"max-age=15552000; includeSubDomains\",\n  \"x-download-options\": \"noopen\",\n  \"x-content-type-options\": \"nosniff\",\n  \"x-xss-protection\": \"1; mode=block\",\n  \"content-type\": \"application/json; charset=utf-8\",\n  \"x-cloud-trace-context\": \"cdf1d4583774a9aa123efc9dd34c8540\",\n  \"date\": \"Wed, 24 Sep 2025 00:59:27 GMT\",\n  \"server\": \"Google Frontend\",\n  \"content-length\": \"84\"\n}\nBody: {\n  \"email\": \"email é obrigatório\",\n  \"password\": \"password é obrigatório\"\n}\n\n\nhttps://on.cypress.io/request",
+                "estack": "CypressError: `cy.request()` failed on:\n\nhttps://serverest.dev/usuarios/7mJqzBJ9mGRQbJ9i\n\nThe response we received from your web server was:\n\n  > 400: Bad Request\n\nThis was considered a failure because the status code was not `2xx` or `3xx`.\n\nIf you do not want status codes to cause failures pass the option: `failOnStatusCode: false`\n\n-----------------------------------------------------------\n\nThe request we sent was:\n\nMethod: PUT\nURL: https://serverest.dev/usuarios/7mJqzBJ9mGRQbJ9i\nHeaders: {\n  \"Connection\": \"keep-alive\",\n  \"Authorization\": \"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluXzE3NTg2NzU1NjYyOTNAcWEuY29tIiwicGFzc3dvcmQiOiJzZWNyZXQxMjMiLCJpYXQiOjE3NTg2NzU1NjYsImV4cCI6MTc1ODY3NjE2Nn0.aQylORtW5BOXuPp668ZdPEEyh0oC-DIRllnp82lRw3M\",\n  \"user-agent\": \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/15.3.0 Chrome/136.0.7103.177 Electron/36.8.1 Safari/537.36\",\n  \"accept\": \"*/*\",\n  \"accept-encoding\": \"gzip, deflate\",\n  \"content-type\": \"application/json\",\n  \"content-length\": 44\n}\nBody: {\"nome\":\"QA Updated\",\"administrador\":\"true\"}\n\n-----------------------------------------------------------\n\nThe response we got was:\n\nStatus: 400 - Bad Request\nHeaders: {\n  \"access-control-allow-origin\": \"*\",\n  \"x-dns-prefetch-control\": \"off\",\n  \"x-frame-options\": \"SAMEORIGIN\",\n  \"strict-transport-security\": \"max-age=15552000; includeSubDomains\",\n  \"x-download-options\": \"noopen\",\n  \"x-content-type-options\": \"nosniff\",\n  \"x-xss-protection\": \"1; mode=block\",\n  \"content-type\": \"application/json; charset=utf-8\",\n  \"x-cloud-trace-context\": \"cdf1d4583774a9aa123efc9dd34c8540\",\n  \"date\": \"Wed, 24 Sep 2025 00:59:27 GMT\",\n  \"server\": \"Google Frontend\",\n  \"content-length\": \"84\"\n}\nBody: {\n  \"email\": \"email é obrigatório\",\n  \"password\": \"password é obrigatório\"\n}\n\n\nhttps://on.cypress.io/request\n    at <unknown> (https://serverest.dev/__cypress/runner/cypress_runner.js:136321:72)\n    at tryCatcher (https://serverest.dev/__cypress/runner/cypress_runner.js:1777:23)\n    at Promise._settlePromiseFromHandler (https://serverest.dev/__cypress/runner/cypress_runner.js:1489:31)\n    at Promise._settlePromise (https://serverest.dev/__cypress/runner/cypress_runner.js:1546:18)\n    at Promise._settlePromise0 (https://serverest.dev/__cypress/runner/cypress_runner.js:1591:10)\n    at Promise._settlePromises (https://serverest.dev/__cypress/runner/cypress_runner.js:1671:18)\n    at _drainQueueStep (https://serverest.dev/__cypress/runner/cypress_runner.js:2377:12)\n    at _drainQueue (https://serverest.dev/__cypress/runner/cypress_runner.js:2370:9)\n    at Async._drainQueues (https://serverest.dev/__cypress/runner/cypress_runner.js:2386:5)\n    at Async.drainQueues (https://serverest.dev/__cypress/runner/cypress_runner.js:2256:14)\nFrom Your Spec Code:\n    at Context.eval (webpack://qa-api-users/./cypress/e2e/users.crud.spec.cy.js:37:7)",
+                "diff": null
+              },
+              "uuid": "5e63ae4c-17f8-4a9c-baac-e7c508b093c0",
+              "parentUUID": "e7541735-bf59-41dd-ac0d-5b58f7b33a74",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Deleta usuário",
+              "fullTitle": "Usuarios - CRUD Deleta usuário",
+              "timedOut": null,
+              "duration": 172,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.request({\n  method: 'DELETE',\n  url: `${usersPath}/${createdId}`,\n  headers: (0, _api.authHeaders)()\n}).its('status').should('be.oneOf', [200, 204]);",
+              "err": {},
+              "uuid": "fd3d3e0a-2bab-4ec2-af99-d07a6cf7ad26",
+              "parentUUID": "e7541735-bf59-41dd-ac0d-5b58f7b33a74",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Detalhe após delete → 400/404",
+              "fullTitle": "Usuarios - CRUD Detalhe após delete → 400/404",
+              "timedOut": null,
+              "duration": 177,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.request({\n  method: 'GET',\n  url: `${usersPath}/${createdId}`,\n  headers: (0, _api.authHeaders)(),\n  failOnStatusCode: false\n}).its('status').should('be.oneOf', [400, 404]);",
+              "err": {},
+              "uuid": "b22d20bb-840f-40d4-9251-5a795c80e57c",
+              "parentUUID": "e7541735-bf59-41dd-ac0d-5b58f7b33a74",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "8afb75bc-8487-45aa-b907-1fe81040abcd",
+            "c1e718cc-6ffc-4048-8a9c-dd8451aeaaed",
+            "84bd0321-20a0-4bbf-af5c-911bdb330a7f",
+            "fd3d3e0a-2bab-4ec2-af99-d07a6cf7ad26",
+            "b22d20bb-840f-40d4-9251-5a795c80e57c"
+          ],
+          "failures": [
+            "5e63ae4c-17f8-4a9c-baac-e7c508b093c0"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 1973,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "b140a0f2-324b-4aac-8ed6-fe07f881f4b9",
+      "title": "",
+      "fullFile": "cypress/e2e/users.ratelimit.spec.cy.js",
+      "file": "cypress/e2e/users.ratelimit.spec.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "e821f569-f28c-42cf-a3fa-2297cf126100",
+          "title": "Usuarios - Rate Limit (100 req/min)",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Cliente não excede 100 req/min (aceita 429 do servidor)",
+              "fullTitle": "Usuarios - Rate Limit (100 req/min) Cliente não excede 100 req/min (aceita 429 do servidor)",
+              "timedOut": null,
+              "duration": 7516,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "let count = 0;\nCypress._.times(20, () => {\n  cy.wait(100);\n  cy.request({\n    method: 'GET',\n    url: usersPath,\n    headers: (0, _api.authHeaders)(),\n    failOnStatusCode: false\n  }).then(res => {\n    expect([200, 429]).to.include(res.status);\n    count += 1;\n  });\n});\ncy.then(() => {\n  expect(count).to.be.lte(LIMIT);\n});",
+              "err": {},
+              "uuid": "b037ba40-4c69-4375-bf3f-40d83fb15d61",
+              "parentUUID": "e821f569-f28c-42cf-a3fa-2297cf126100",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "b037ba40-4c69-4375-bf3f-40d83fb15d61"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 7516,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "e77a1f40-630a-4846-a8ec-62565f645c63",
+      "title": "",
+      "fullFile": "cypress/e2e/users.validation.spec.cy.js",
+      "file": "cypress/e2e/users.validation.spec.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "39f85512-8c84-4e5c-8d7c-e0c9ef5fd9d5",
+          "title": "Usuarios - Validações/Negativos",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Campos obrigatórios faltando",
+              "fullTitle": "Usuarios - Validações/Negativos Campos obrigatórios faltando",
+              "timedOut": null,
+              "duration": 1201,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "['nome', 'email', 'password', 'administrador'].forEach(field => {\n  const u = (0, _dataFactory.newUser)();\n  delete u[field];\n  cy.request({\n    method: 'POST',\n    url: usersPath,\n    headers: (0, _api.authHeaders)(),\n    body: u,\n    failOnStatusCode: false\n  }).its('status').should('be.oneOf', [400, 422]);\n});",
+              "err": {},
+              "uuid": "c61aa71b-5ab0-4558-b9e4-fe7f90d1c955",
+              "parentUUID": "39f85512-8c84-4e5c-8d7c-e0c9ef5fd9d5",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Emails inválidos",
+              "fullTitle": "Usuarios - Validações/Negativos Emails inválidos",
+              "timedOut": null,
+              "duration": 831,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "_users.default.invalidEmails.forEach(email => {\n  cy.request({\n    method: 'POST',\n    url: usersPath,\n    headers: (0, _api.authHeaders)(),\n    body: (0, _dataFactory.newUser)({\n      email\n    }),\n    failOnStatusCode: false\n  }).its('status').should('be.oneOf', [400, 422]);\n});",
+              "err": {},
+              "uuid": "8a9b30dc-a64b-401c-8f82-8bc54547fa40",
+              "parentUUID": "39f85512-8c84-4e5c-8d7c-e0c9ef5fd9d5",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Email duplicado",
+              "fullTitle": "Usuarios - Validações/Negativos Email duplicado",
+              "timedOut": null,
+              "duration": 175,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.request({\n  method: 'POST',\n  url: usersPath,\n  headers: (0, _api.authHeaders)(),\n  body: (0, _dataFactory.newUser)({\n    email: existing.email\n  }),\n  failOnStatusCode: false\n}).its('status').should('be.oneOf', [400, 409]);",
+              "err": {},
+              "uuid": "c5bc1c79-981f-48ff-bf4f-432fab4f40cd",
+              "parentUUID": "39f85512-8c84-4e5c-8d7c-e0c9ef5fd9d5",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Campo \"administrador\" deve ser string \"true\" ou \"false\"",
+              "fullTitle": "Usuarios - Validações/Negativos Campo \"administrador\" deve ser string \"true\" ou \"false\"",
+              "timedOut": null,
+              "duration": 830,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const wrongTypes = [true, false, 1, 0, null];\nwrongTypes.forEach(val => {\n  cy.request({\n    method: 'POST',\n    url: usersPath,\n    headers: (0, _api.authHeaders)(),\n    body: (0, _dataFactory.newUser)({\n      administrador: val\n    }),\n    failOnStatusCode: false\n  }).its('status').should('be.oneOf', [400, 422]);\n});",
+              "err": {},
+              "uuid": "f6f47a07-d802-4aba-b991-3f7f6405e7be",
+              "parentUUID": "39f85512-8c84-4e5c-8d7c-e0c9ef5fd9d5",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Senhas fracas (ServeRest aceita → considerar limitação)",
+              "fullTitle": "Usuarios - Validações/Negativos Senhas fracas (ServeRest aceita → considerar limitação)",
+              "timedOut": null,
+              "duration": 839,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "_users.default.weakPasswords.forEach(pwd => {\n  cy.request({\n    method: 'POST',\n    url: usersPath,\n    headers: (0, _api.authHeaders)(),\n    body: (0, _dataFactory.newUser)({\n      password: pwd\n    }),\n    failOnStatusCode: false\n  }).its('status').should('be.oneOf', [201, 400, 422]);\n});",
+              "err": {},
+              "uuid": "df9ef679-b31b-487e-8138-ad3c82248584",
+              "parentUUID": "39f85512-8c84-4e5c-8d7c-e0c9ef5fd9d5",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "ID inexistente em GET/PUT/DELETE",
+              "fullTitle": "Usuarios - Validações/Negativos ID inexistente em GET/PUT/DELETE",
+              "timedOut": null,
+              "duration": 4699,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "const ghost = '000000000000000000000000';\ncy.request({\n  method: 'GET',\n  url: `${usersPath}/${ghost}`,\n  headers: (0, _api.authHeaders)(),\n  failOnStatusCode: false\n}).its('status').should('be.oneOf', [400, 404]);\ncy.request({\n  method: 'PUT',\n  url: `${usersPath}/${ghost}`,\n  headers: (0, _api.authHeaders)(),\n  body: {\n    nome: 'X'\n  },\n  failOnStatusCode: false\n}).its('status').should('be.oneOf', [400, 404]);\ncy.request({\n  method: 'DELETE',\n  url: `${usersPath}/${ghost}`,\n  headers: (0, _api.authHeaders)(),\n  failOnStatusCode: false\n}).its('status').should('be.oneOf', [400, 404]);",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 4000ms: expected 200 to be one of [ 400, 404 ]",
+                "estack": "AssertionError: Timed out retrying after 4000ms: expected 200 to be one of [ 400, 404 ]\n    at Context.eval (webpack://qa-api-users/./cypress/e2e/users.validation.spec.cy.js:78:21)",
+                "diff": "- 200\n+ [ 400, 404 ]\n"
+              },
+              "uuid": "e75c2395-4218-417d-90e6-5dbff38e9499",
+              "parentUUID": "39f85512-8c84-4e5c-8d7c-e0c9ef5fd9d5",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "c61aa71b-5ab0-4558-b9e4-fe7f90d1c955",
+            "8a9b30dc-a64b-401c-8f82-8bc54547fa40",
+            "c5bc1c79-981f-48ff-bf4f-432fab4f40cd",
+            "f6f47a07-d802-4aba-b991-3f7f6405e7be",
+            "df9ef679-b31b-487e-8138-ad3c82248584"
+          ],
+          "failures": [
+            "e75c2395-4218-417d-90e6-5dbff38e9499"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 8575,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "9f15c490-5672-49a7-860d-de6dca13ac13",
+      "title": "",
+      "fullFile": "cypress/e2e/auth.spec.cy.js",
+      "file": "cypress/e2e/auth.spec.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "d22a2616-91cd-4bb6-90cd-7f7333ba6cb9",
+          "title": "Auth - JWT",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Cria admin e obtém token de autorização",
+              "fullTitle": "Auth - JWT Cria admin e obtém token de autorização",
+              "timedOut": null,
+              "duration": 573,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.auth_createAdminAndLogin();\ncy.then(() => {\n  expect(Cypress.env('token')).to.be.a('string').and.not.be.empty;\n});",
+              "err": {},
+              "uuid": "8e126653-a802-4378-bac2-ad18ce95d2aa",
+              "parentUUID": "d22a2616-91cd-4bb6-90cd-7f7333ba6cb9",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "8e126653-a802-4378-bac2-ad18ce95d2aa"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 573,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "reports",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.3.0"
+    }
+  }
+}
